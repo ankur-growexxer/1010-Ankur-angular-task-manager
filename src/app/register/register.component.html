@@ -1,0 +1,199 @@
+<link
+  href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+  rel="stylesheet"
+  id="bootstrap-css"
+/>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<div class="container register">
+  <div class="row">
+    <div class="col-md-3 register-left"></div>
+    <div class="col-md-9 register-right">
+      <div class="tab-content" id="myTabContent">
+        <div
+          class="tab-pane fade show active"
+          id="home"
+          role="tabpanel"
+          aria-labelledby="home-tab"
+        >
+          <h3 class="register-heading">Employee Register</h3>
+          <form [formGroup]="registerForm" (ngSubmit)="onregister()">
+            <div class="row register-form">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Name *"
+                    name="Name"
+                    formControlName="name"
+                  />
+                  <div
+                    *ngIf="
+                      registerForm.get('name')?.invalid &&
+                      registerForm.get('name')?.errors &&
+                      (registerForm.get('name')?.dirty ||
+                        registerForm.get('name')?.touched)
+                    "
+                  >
+                    <small
+                      class="text-danger"
+                      *ngIf="registerForm.get('name')?.hasError('required')"
+                      >This field is required.</small
+                    ><small
+                      class="text-danger"
+                      *ngIf="registerForm.get('name')?.hasError('pattern')"
+                      >Invalid name!!</small
+                    >
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <input
+                    type="email"
+                    class="form-control"
+                    placeholder="Your Email *"
+                    name="email"
+                    formControlName="email"
+                  />
+                  <div
+                    *ngIf="
+                      registerForm.get('email')?.invalid &&
+                      registerForm.get('email')?.errors &&
+                      (registerForm.get('email')?.dirty ||
+                        registerForm.get('email')?.touched)
+                    "
+                  >
+                    <small
+                      class="text-danger"
+                      *ngIf="registerForm.get('email')?.hasError('required')"
+                      >This field is required.</small
+                    ><small
+                      class="text-danger"
+                      *ngIf="registerForm.get('email')?.hasError('pattern')"
+                      >Invalid email!!</small
+                    >
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <input
+                    type="password"
+                    class="form-control"
+                    placeholder="Password *"
+                    name="password"
+                    formControlName="password"
+                  />
+                  <div
+                    *ngIf="
+                      registerForm.get('password')?.invalid &&
+                      registerForm.get('password')?.errors &&
+                      (registerForm.get('password')?.dirty ||
+                        registerForm.get('password')?.touched)
+                    "
+                  >
+                    <small
+                      class="text-danger"
+                      *ngIf="registerForm.get('password')?.hasError('required')"
+                      >This field is required.</small
+                    ><small
+                      class="text-danger"
+                      *ngIf="registerForm.get('password')?.hasError('pattern')"
+                      >Invalid password!!</small
+                    >
+                    <small
+                      class="text-danger"
+                      *ngIf="
+                        password?.errors?.['forbiddenName']
+                      "
+                      >You can not use this username</small
+                    >
+                  </div>
+                </div>
+                <div class="form-group">
+                  <input
+                    type="password"
+                    class="form-control"
+                    placeholder="Confirm Password *"
+                    name="confirmpassword"
+                    formControlName="confirmpassword"
+                  />
+                  <div
+                    *ngIf="
+                      registerForm.get('confirmpassword')?.invalid &&
+                      registerForm.get('confirmpassword')?.errors &&
+                      (registerForm.get('confirmpassword')?.dirty ||
+                        registerForm.get('confirmpassword')?.touched)
+                    "
+                  >
+                    <small
+                      class="text-danger"
+                      *ngIf="
+                        registerForm
+                          .get('confirmpassword')
+                          ?.hasError('required')
+                      "
+                      >This field is required.</small
+                    ><small
+                      class="text-danger"
+                      *ngIf="
+                        registerForm.get('confirmpassword')?.hasError('pattern')
+                      "
+                      >Invalid confirmpassword!!</small
+                    >
+                    <small
+                      class="text-danger"
+                      *ngIf="
+                        confirmpassword?.errors?.['misMatch']
+                      "
+                      >You can not use this username</small
+                    >
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <input
+                    type="text"
+                    name="age"
+                    class="form-control"
+                    placeholder="Age *"
+                    formControlName="age"
+                  />
+                  <div
+                    *ngIf="
+                      registerForm.get('age')?.invalid &&
+                      registerForm.get('age')?.errors &&
+                      (registerForm.get('age')?.dirty ||
+                        registerForm.get('age')?.touched)
+                    "
+                  >
+                    <small
+                      class="text-danger"
+                      *ngIf="registerForm.get('age')?.hasError('required')"
+                      >This field is required.</small
+                    ><small
+                      class="text-danger"
+                      *ngIf="registerForm.get('age')?.hasError('pattern')"
+                      >Invalid age!!</small
+                    >
+                  </div>
+                </div>
+
+                <input
+                  type="submit"
+                  class="btnRegister"
+                  value="Register"
+                  [disabled]="!registerForm.valid"
+                />
+                <a routerLink=""
+                  ><input type="button" class="btnRegister" value="Login"
+                /></a>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<br />

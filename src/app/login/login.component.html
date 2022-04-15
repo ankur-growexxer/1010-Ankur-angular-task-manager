@@ -1,0 +1,108 @@
+<link
+  href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+  rel="stylesheet"
+  id="bootstrap-css"
+/>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<div class="container register">
+  <div class="row">
+    <div class="col-md-3 register-left"></div>
+    <div class="col-md-9 register-right">
+      <div class="tab-content" id="myTabContent">
+        <div
+          class="tab-pane fade show active"
+          id="home"
+          role="tabpanel"
+          aria-labelledby="home-tab"
+        >
+          <h3 class="register-heading">Employee Login</h3>
+          <form
+            [formGroup]="profileForm"
+            (ngSubmit)="
+              auth.loginuser(
+                profileForm.value.email,
+                profileForm.value.password
+              )
+            "
+          >
+            <div class="row register-form">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Email*"
+                    name="email"
+                    formControlName="email"
+                  />
+                  <!-- <span
+                    style="color: red"
+                    *ngIf="username && username.invalid && username.touched"
+                    >username is not vaild</span
+                  > -->
+
+                  <div
+                    *ngIf="
+                      profileForm.get('email')?.invalid &&
+                      profileForm.get('email')?.errors &&
+                      (profileForm.get('email')?.dirty ||
+                        profileForm.get('email')?.touched)
+                    "
+                  >
+                    <small
+                      class="text-danger"
+                      *ngIf="profileForm.get('email')?.hasError('required')"
+                      >This field is required.</small
+                    ><small
+                      class="text-danger"
+                      *ngIf="profileForm.get('email')?.hasError('pattern')"
+                      >Invalid email!!</small
+                    >
+                  </div>
+                </div>
+                <div class="form-group">
+                  <input
+                    type="password"
+                    class="form-control"
+                    placeholder="Password *"
+                    name="password"
+                    formControlName="password"
+                  />
+                  <div
+                    *ngIf="
+                      profileForm.get('password')?.invalid &&
+                      profileForm.get('password')?.errors &&
+                      (profileForm.get('password')?.dirty ||
+                        profileForm.get('password')?.touched)
+                    "
+                  >
+                    <small
+                      class="text-danger"
+                      *ngIf="profileForm.get('password')?.hasError('required')"
+                      >This field is required.</small
+                    >
+                    <small
+                      class="text-danger"
+                      *ngIf="profileForm.get('password')?.hasError('minlength')"
+                      >min 6 char is required</small
+                    >
+                  </div>
+                </div>
+                <a routerLink="register"
+                  ><input type="button" class="btnRegister" value="Register"
+                /></a>
+                <input
+                  type="submit"
+                  class="btnRegister"
+                  value="Login"
+                  [disabled]="!profileForm.valid"
+                />
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
