@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 // import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { passwordValidator } from '../shared/custome_validator/confirm-password.validator';
+import { ConfirmPasswordValidator } from '../shared/custome_validator/confirm-password.validator';
 import { forbiddenNameValidator } from '../shared/custome_validator/password.validator';
 import { AuthService } from '../shared/services/auth.service';
-AuthService;
+
 // import { AuthService } from '../shared/auth.service';
 @Component({
   selector: 'app-register',
@@ -18,48 +18,44 @@ export class RegisterComponent implements OnInit {
   constructor(private fb: FormBuilder, private auth: AuthService) {}
 
   ngOnInit(): void {}
-  registerForm = this.fb.group({
-    name: ['', [Validators.required, Validators.pattern('^[A-Za-z]+$')]],
-    email: [
-      '',
-      [
-        Validators.required,
-        Validators.email,
-        Validators.pattern('[^ @]*@[^ @]*'),
+  registerForm = this.fb.group(
+    {
+      name: ['', [Validators.required, Validators.pattern('^[A-Za-z]+$')]],
+      email: [
+        '',
+        [
+          Validators.required,
+          Validators.email,
+          Validators.pattern('[^ @]*@[^ @]*'),
+        ],
       ],
-    ],
-    password: [
-      '',
-      [
-        Validators.required,
-        Validators.minLength(6),
-        forbiddenNameValidator(
-          /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Z\d@$!%*?&]{8,}$/i
-        ),
-        // Validators.pattern('^(?=.*d)(?=.*[a-z])(?=.*[A-Z]).{8,}$'),
+      password: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(6),
+          forbiddenNameValidator(
+            /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Z\d@$!%*?&]{8,}$/i
+          ),
+        ],
       ],
-    ],
-    confirmpassword: [
-      '',
-      [
-        Validators.required,
-        Validators.minLength(6),
-        forbiddenNameValidator(
-          /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Z\d@$!%*?&]{8,}$/i
-        ),
-        passwordValidator,
+      confirmpassword: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(6),
+          forbiddenNameValidator(
+            /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Z\d@$!%*?&]{8,}$/i
+          ),
+        ],
       ],
-    ],
-    age: [
-      null,
-      [
-        Validators.required,
-        // Validators.minLength(1),
-        // Validators.maxLength(3),
-        Validators.pattern('^(?:1[8-9]|[2-5][0-9]|60)$'),
+      age: [
+        null,
+        [Validators.required, Validators.pattern('^(?:1[8-9]|[2-5][0-9]|60)$')],
       ],
-    ],
-  });
+    },
+    { validators: ConfirmPasswordValidator() }
+  );
 
   get name() {
     return this.registerForm.get('name');
@@ -79,9 +75,5 @@ export class RegisterComponent implements OnInit {
 
   onregister() {
     this.auth.setdata(this.registerForm.value);
-    // this.auth.loginuser(
-    //   this.profileForm.value.username,
-    //   this.profileForm.value.password
-    // );
   }
 }

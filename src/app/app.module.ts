@@ -13,6 +13,13 @@ import { FooterComponent } from './footer/footer.component';
 import { AuthService } from './shared/services/auth.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HelpComponent } from './help/help.component';
+import { AboutComponent } from './about/about.component';
+import { HomeComponent } from './home/home.component';
+import { ProfileComponent } from './profile/profile.component';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
+import { CreateTaskComponent } from './create-task/create-task.component';
+import { EditTaskComponent } from './edit-task/edit-task.component';
+import { StatusDirective } from './shared/directive/status.directive';
 
 @NgModule({
   declarations: [
@@ -23,6 +30,13 @@ import { HelpComponent } from './help/help.component';
     HeaderComponent,
     FooterComponent,
     HelpComponent,
+    AboutComponent,
+    HomeComponent,
+    ProfileComponent,
+    EditProfileComponent,
+    CreateTaskComponent,
+    EditTaskComponent,
+    StatusDirective,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,48 @@
+<app-header></app-header>
+<div class="panel panel-primary bg-light float-none">
+  <div class="panel-heading p-3 text-center">
+    <h3 class="panel-title text-uppercase">Profile</h3>
+  </div>
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-md-9 col-lg-9">
+        <table class="table table-user-information">
+          <tbody>
+            <tr>
+              <td><strong>Id</strong></td>
+              <td>{{ authService.userInfo?.__v }}</td>
+            </tr>
+            <tr>
+              <td><strong>Name</strong></td>
+              <td>{{ authService.userInfo?.name | uppercase }}</td>
+            </tr>
+            <tr>
+              <td><strong>Email</strong></td>
+              <td>{{ authService.userInfo?.email }}</td>
+            </tr>
+            <tr>
+              <td><strong>Age</strong></td>
+              <td>{{ authService.userInfo?.age }}</td>
+            </tr>
+            <tr>
+              <td><strong>Created At</strong></td>
+              <td>{{ authService.userInfo?.createdAt | date }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-md-12 text-center">
+        <a
+          class="btn btn-primary w-25 mt-4 mx-2"
+          [routerLink]="['/profile/edit', authService.userInfo?.__v]"
+        >
+          Edit Profile
+        </a>
+        <a class="btn btn-primary w-25 mt-4" (click)="userService.deleteUser()">
+          Delete
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

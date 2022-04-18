@@ -1,0 +1,62 @@
+<app-header></app-header>
+
+<div class="container">
+  <div class="d-flex bd-highlight mb-3">
+    <div class="me-auto p-2 bd-highlight"><h2>Tasks</h2></div>
+    <div class="p-2 bd-highlight">
+      <button
+        type="button"
+        class="btn btn-secondary"
+        [routerLink]="['/createtask']"
+      >
+        Create New Task
+      </button>
+    </div>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Description</th>
+          <th scope="col">Status</th>
+          <th scope="col">createdAt</th>
+          <th scope="col">Mark</th>
+          <th scope="col">Edit</th>
+          <th scope="col">Delete</th>
+        </tr>
+      </thead>
+      <tbody id="mytable">
+        <tr *ngFor="let task of taskService.tasks; let i = index" appStatus>
+          <th scope="row">{{ i + 1 }}</th>
+          <td>{{ task.description }}</td>
+          <td>{{ task.completed ? "Completed" : "Pending" }}</td>
+          <td>{{ task.createdAt | date }}</td>
+          <td><i class="fa fa-{{ task.completed ? 'check' : 'info' }}"></i></td>
+
+          <td>
+            <button
+              type="button"
+              class="btn btn-secondary"
+              [routerLink]="['/tasks/edit', task._id]"
+            >
+              Edit
+            </button>
+          </td>
+          <td>
+            <button
+              type="button"
+              class="btn btn-secondary"
+              (click)="taskService.delete(task._id)"
+            >
+              Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<app-footer></app-footer>

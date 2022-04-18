@@ -20,12 +20,8 @@ export class DashboardComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // this.user = JSON.parse(this.authService.getuser());
-    // console.log(this.user);
-
     this.activatedRoute.data.subscribe((response: any) => {
       this.user = JSON.parse(response.auth);
-      // console.log(this.user);
     });
   }
 }

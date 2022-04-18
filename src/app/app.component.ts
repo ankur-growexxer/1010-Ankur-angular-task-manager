@@ -8,7 +8,7 @@ import { AuthService } from './shared/services/auth.service';
 })
 export class AppComponent {
   title = '1010-Ankur-angular-task-manager';
-  currentUser = localStorage.getItem('currentUser') ? true : false;
+  token = localStorage.getItem('token') ? true : false;
 
   constructor(public readonly auth: AuthService) {}
 }

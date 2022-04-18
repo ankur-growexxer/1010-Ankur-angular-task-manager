@@ -106,7 +106,7 @@
                       *ngIf="
                         password?.errors?.['forbiddenName']
                       "
-                      >You can not use this username</small
+                      >You can not use this password</small
                     >
                   </div>
                 </div>
@@ -120,10 +120,11 @@
                   />
                   <div
                     *ngIf="
-                      registerForm.get('confirmpassword')?.invalid &&
-                      registerForm.get('confirmpassword')?.errors &&
-                      (registerForm.get('confirmpassword')?.dirty ||
-                        registerForm.get('confirmpassword')?.touched)
+                      (confirmpassword?.invalid || registerForm?.errors?.['misMatch']) &&
+
+(confirmpassword?.errors || registerForm?.errors?.['misMatch']) &&
+
+(confirmpassword?.dirty || confirmpassword?.touched)
                     "
                   >
                     <small
@@ -144,9 +145,9 @@
                     <small
                       class="text-danger"
                       *ngIf="
-                        confirmpassword?.errors?.['misMatch']
+                        registerForm?.errors?.['misMatch']
                       "
-                      >You can not use this username</small
+                      >password not match</small
                     >
                   </div>
                 </div>
@@ -185,7 +186,7 @@
                   value="Register"
                   [disabled]="!registerForm.valid"
                 />
-                <a routerLink=""
+                <a [routerLink]="['']"
                   ><input type="button" class="btnRegister" value="Login"
                 /></a>
               </div>

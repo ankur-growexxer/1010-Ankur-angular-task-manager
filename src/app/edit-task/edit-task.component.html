@@ -1,0 +1,55 @@
+<app-header></app-header>
+<div class="panel panel-primary bg-light float-none box">
+  <div class="panel-heading p-3 text-center">
+    <h3 class="panel-title text-uppercase">Edit Task</h3>
+  </div>
+  <div class="panel-body">
+    <form [formGroup]="editTask" class="edit_profile_form">
+      <div class="row">
+        <div class="col-md-9 col-lg-9">
+          <table class="table table-user-information">
+            <tbody>
+              <tr>
+                <td><strong>description</strong></td>
+                <td>
+                  <input
+                    id="name"
+                    type="text"
+                    class="rounded form-control"
+                    [value]="taskService.task?.description"
+                    formControlName="description"
+                    required
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td><strong>Status</strong></td>
+                <td>
+                  <input
+                    id="age"
+                    type="text"
+                    class="rounded form-control"
+                    [value]="taskService.task?.completed"
+                    formControlName="status"
+                    required
+                  />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="col-md-12 text-center">
+          <button
+            type="submit"
+            class="btn btn-warning w-25 mt-4 mx-2"
+            [disabled]="!editTask.valid"
+            (click)="onEditTask()"
+          >
+            Update Task
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<app-footer></app-footer>

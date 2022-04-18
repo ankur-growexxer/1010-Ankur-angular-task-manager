@@ -8,11 +8,11 @@ export class AuthService {
   private loginurl = 'http://localhost:3000/api/users/login';
   user: any;
   userInfo: any = [];
+  token: any = '';
   usersdata = [{}];
   constructor(private router: Router, private http: HttpClient) {}
 
   setdata(user: any) {
-    // console.log(user);
     let new_user = {
       name: user.name,
       email: user.email,
@@ -22,20 +22,17 @@ export class AuthService {
 
     const headers = { 'content-type': 'application/json' };
     const body = JSON.stringify(new_user);
-    // console.log(body);
+
     this.user = this.http
       .post('http://localhost:3000/api/users', body, {
         headers: headers,
       })
       .subscribe((res) => {
-        // console.log('respose ' + res);
-
         localStorage.clear();
 
         const token = Object.values(res)[1];
 
-        localStorage.setItem('token', token);
-        console.log('token set in localStorage', token);
+        this.router.navigate(['/']);
       });
 
     this.usersdata.push(user);
@@ -43,22 +40,24 @@ export class AuthService {
   }
 
   getuser() {
-    this.userInfo = localStorage.getItem('currentUser') || null;
-    this.userInfo = JSON.parse(this.userInfo);
-    return JSON.stringify(this.userInfo);
-    // console.log(this.userInfo);
+    this.token = localStorage.getItem('token') || null;
+    this.token = JSON.parse(this.token);
+    return JSON.stringify(this.token);
   }
-  setuser(token: string) {
+  settoken(token: string) {
+    this.token = '';
+    this.token = token;
+    localStorage.setItem('token', this.token);
+  }
+  setuser(user: any) {
+    console.log(user);
     this.userInfo = {};
-    this.userInfo = {
-      token: token,
-    };
-    localStorage.setItem('currentUser', JSON.stringify(this.userInfo));
+    this.userInfo = user;
   }
 
   loginuser(username: any, password: any) {
     const token = localStorage.getItem('token');
-    // console.log('token from localStorage', token);
+
     var params = {
       email: username,
       password: password,
@@ -77,7 +76,7 @@ export class AuthService {
         (data) => {
           console.log(data);
           if (data) {
-            this.setuser(data.token);
+            this.settoken(data.token);
             this.router.navigate(['/dashboard']);
           }
         },
@@ -88,7 +87,8 @@ export class AuthService {
   }
   logoutuser() {
     this.userInfo = [];
-    localStorage.removeItem('currentUser');
+    this.token = [];
+    localStorage.removeItem('token');
     this.router.navigate(['']);
   }
 }
