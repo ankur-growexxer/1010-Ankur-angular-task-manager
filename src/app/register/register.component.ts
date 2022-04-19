@@ -35,7 +35,7 @@ export class RegisterComponent implements OnInit {
           Validators.required,
           Validators.minLength(6),
           forbiddenNameValidator(
-            /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Z\d@$!%*?&]{8,}$/i
+            /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/
           ),
         ],
       ],
@@ -45,7 +45,7 @@ export class RegisterComponent implements OnInit {
           Validators.required,
           Validators.minLength(6),
           forbiddenNameValidator(
-            /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Z\d@$!%*?&]{8,}$/i
+            /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/
           ),
         ],
       ],

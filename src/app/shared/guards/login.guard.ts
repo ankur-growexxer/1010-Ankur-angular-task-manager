@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {
   ActivatedRouteSnapshot,
   CanActivate,
+  Router,
   RouterStateSnapshot,
   UrlTree,
 } from '@angular/router';
@@ -11,6 +12,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class LoginGuard implements CanActivate {
+  constructor(public readonly router: Router) {}
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
@@ -22,6 +24,6 @@ export class LoginGuard implements CanActivate {
     if (!localStorage.getItem('token')) {
       return true;
     }
-    return false;
+    return this.router.navigate(['/dashboard']);
   }
 }
