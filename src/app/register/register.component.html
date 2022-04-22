@@ -96,7 +96,7 @@
                       class="text-danger"
                       *ngIf="registerForm.get('password')?.hasError('required')"
                       >This field is required.</small
-                    ><small
+                    ><br /><small
                       class="text-danger"
                       *ngIf="registerForm.get('password')?.hasError('pattern')"
                       >Invalid password!!</small
@@ -106,7 +106,8 @@
                       *ngIf="
                         password?.errors?.['forbiddenName']
                       "
-                      >You can not use this password</small
+                      >Password must be min 8 char, 1 uppercase, 1 special
+                      character</small
                     >
                   </div>
                 </div>
